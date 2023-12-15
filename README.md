@@ -31,7 +31,7 @@ Aqui se é utilizado dos forms no bootstrap para implementar a página do usuár
 
 Aqui utilizamos o firebase, um serviço de nuvem da google como o data base do programa.
 
-## Aula 7 e 8- Utilizando o useEffect
+## Aula 7 e 8- Utilizando o useEffect, resgatando dados do banco e excluíndo.
 
 
 ## Aula 9 - 
