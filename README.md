@@ -33,11 +33,13 @@ Aqui utilizamos o firebase, um serviço de nuvem da google como o data base do p
 
 ## Aula 7 e 8- Utilizando o useEffect, resgatando dados do banco e excluíndo.
 
+Utiliza-se o Bootstrap Icons: ~> npm i bootstrap-icons
+Icone utilizado: https://icons.getbootstrap.com/icons/trash3/
 
-## Aula 9 - 
+## Aula 9 e 10 - Edição de Usuário
 
 
-## Aula 10 - 
+## Aula 11 - 
 
 
 ## Comandos Úteis
