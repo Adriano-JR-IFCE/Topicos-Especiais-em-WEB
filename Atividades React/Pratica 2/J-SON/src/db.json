@@ -1,0 +1,16 @@
+{
+    "users":[
+        {
+            "id":1,
+            "nome":"fulano de tal",
+            "sobrenome": "dos Anzois Pereira",
+            "idade": 40
+        },
+        {
+            "id":2,
+            "nome":"Maria",
+            "sobrenome": "dos Anzois Pereira",
+            "idade": 39
+        }
+    ]
+}
