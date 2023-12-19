@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { db } from '../../services/firebaseConnection';
 import {addDoc, collection, getDocs, doc, deleteDoc} from 'firebase/firestore';
 import {useNavigate} from 'react-router-dom'
+import { axios } from 'axios';
 
 const user = () => {
   {/*CONSTANTES:*/}
@@ -12,8 +13,11 @@ const user = () => {
   const[idade, setIdade] = useState()
   {/*CONST QUE FAZ USO DA LISTA:*/}
   const [users, setUsers] = useState([])
+  const [updateList, setUpdateList] = useState(false)
   {/*INICIALIZANDO O NAVIGATE:*/}
   const navigate = useNavigate()
+
+  const api = 'http://localhost:3000/users'
 
   {/*FUNÇÕES:*/}
   async function findAllUsers(){{/*FUNÇÃO PARA BUSCAR TODOS OS USUÁRIOS NO BANCO:*/}
@@ -40,23 +44,31 @@ const user = () => {
 
   async function registerUser(e){
     e.preventDefault()
-    {/*Salvar no Banco de Dados Firebase*/}
+    if(nome === ''){
+      return false
+    }
+    {/*Salvar no Banco de Dados JSon Server*/}
     try {
-      const docRef = await addDoc(collection(db,'topicos'), {
-        nome:nome,
-        sobrenome:sobrenome,
-        idade:idade
+      let listUsers = await axios.get(api)
+      console.log(listUsers.data)
+      let lastId = parseInt(listUsers.data.length)
+
+        axios.post(api, {
+        id: lastId,
+        nome: nome,
+        sobrenome: sobrenome,
+        idade: idade
       })
-      {/*LIMPAR CAMPOS:*/}
       setNome('')
       setSobrenome('')
       setIdade('')
+      setUpdateList(true)
 
-      alert('Dados gravados no banco de dados!')
     } catch (error) {
       console.log(error)
     }
   }
+
   {/*FUNÇÃO PARA DELETAR OS USUÁRIOS:*/}
   async function handleDelete(id){
     const docRef = doc(db, 'topicos', id)
@@ -78,7 +90,7 @@ const user = () => {
   return (
     <>
       <div className="container">
-        <Form onSubmit={registerUser}>
+        <Form >
           {/*NOME*/}
           <Form.Group>
             <Row>
@@ -107,7 +119,7 @@ const user = () => {
               </Col>
             </Row>            
           </Form.Group>
-          <Button primary type="submit">Salvar</Button>
+          <Button primary type="submit" onChange={(e)=>registerUser(e.target.value)}>Salvar</Button>
         </Form>
         {/*Renderiza a lista abaixo do <form>*/}
         <div className="containet-table">
